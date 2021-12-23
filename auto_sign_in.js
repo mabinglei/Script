@@ -7,7 +7,7 @@
 
 const url1 = "https://h5.xiaofubao.com/marketing/health/getDetail";
 const method = "POST";
-const headers1 = {"User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Html5Plus/1.0 (Immersed/44)  (Immersed/44) WKWebview ZJYXYwebviewbroswer ZJYXYIphone tourCustomer /yunmaapp.NET/2.4.4/11A075E8-CF7F-4FF3-B106-A00A364FA35B","Cookie": "shiroJID=2c0d1c4a-a5ef-4215-b213-55f96e941e7a"};
+const headers1 = {"Cookie": "shiroJID=2c0d1c4a-a5ef-4215-b213-55f96e941e7a"};
 const data1 = {"userId": "2009211656237844100"};
 const data={"address" : "云南省昆明市呈贡区吴家营街道梁王路文聚公寓",
         "uuToken" : "PpVA8ejkbx44YENMEgf6BWVT/H8b6e68Fld47CWd/OP+osCumDnYrJ/7KwNFIl2etvzy4mtPgr7oot4j9TMaag==",
