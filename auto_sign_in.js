@@ -8,7 +8,7 @@
 const url1 = "https://h5.xiaofubao.com/marketing/health/getDetail";
 const method = "POST";
 const headers1 = {"Cookie": "shiroJID=2c0d1c4a-a5ef-4215-b213-55f96e941e7a"};
-const data1 = {"userId": "2009211656237844100"};
+const data1 = "userId": "2009211656237844100";
 const data={"address" : "云南省昆明市呈贡区吴家营街道梁王路文聚公寓",
         "uuToken" : "PpVA8ejkbx44YENMEgf6BWVT/H8b6e68Fld47CWd/OP+osCumDnYrJ/7KwNFIl2etvzy4mtPgr7oot4j9TMaag==",
         "loginUserId" : "2009211656237844100",
@@ -63,7 +63,7 @@ const getRequest = {
     url: url1,
     method: method, // Optional, default GET.
     headers: headers1, // Optional.
-    body: response.body // Optional.
+    body: data1 // Optional.
 };
 
 $task.fetch(getRequest).then(response => {
