@@ -68,8 +68,9 @@ const getRequest = {
 
 $task.fetch(getRequest).then(response => {
     // response.statusCode, response.headers, response.body
-    console.log(response.body.data);
-    $notify("Title", "Subtitle", response.body.data); // Success!
+        const getbody = JSON.parse(data);
+    console.log(getbody.data);
+    $notify("Title", "Subtitle", getbody.data); // Success!
     $done();
 }, reason => {
     // reason.error
