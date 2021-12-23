@@ -74,6 +74,6 @@ $task.fetch(getRequest).then(response => {
     $done();
 }, reason => {
     // reason.error
-    $notify("Title", "Subtitle", reason.error); // Error!
+    $notify("打卡失败！", "获取用户表单ID失败！", reason.error); // Error!
     $done();
 });
