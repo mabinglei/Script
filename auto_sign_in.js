@@ -21,8 +21,8 @@ const getRequest = {
 
 $task.fetch(getRequest).then(response => {
     // response.statusCode, response.headers, response.body
-        const getbody = JSON.parse(response.body);
-        const num = getbody.data.id;
+        var getbody = JSON.parse(response.body);
+        var num = getbody.data.id;
 
     const doRequest = {
     url: do_url,
