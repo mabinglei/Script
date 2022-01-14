@@ -23,12 +23,7 @@ $task.fetch(getRequest).then(response => {
     // response.statusCode, response.headers, response.body
         var getbody = JSON.parse(response.body);
         var num = getbody.data.id;
-
-    const doRequest = {
-    url: do_url,
-    method: method, // Optional, default GET.
-    headers: headers, // Optional.
-    body: JSON.stringify({
+    var data = {
         "address" : "云南省昆明市寻甸回族彝族自治县先锋镇138乡道",
         "uuToken" : "PpVA8ejkbx44YENMEgf6BWVT/H8b6e68Fld47CWd/OP+osCumDnYrJ/7KwNFIl2etvzy4mtPgr7oot4j9TMaag==",
         "loginUserId" : "2009211656237844100",
@@ -78,7 +73,12 @@ $task.fetch(getRequest).then(response => {
         'isolatedPlace':'',
         'temperature':'36',
         'country':''
-        })
+        }
+    const doRequest = {
+    url: do_url,
+    method: method, // Optional, default GET.
+    headers: headers, // Optional.
+    body: JSON.stringify(data)
 };
 $task.fetch(doRequest).then(response => {
     // response.statusCode, response.headers, response.body
