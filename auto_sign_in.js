@@ -1,16 +1,9 @@
-
-/**
- * @fileoverview Example to compose HTTP request
- * and handle the response.
- *
- */
-
 const get_url = "https://h5.xiaofubao.com/marketing/health/getDetail";
 const do_url = "https://h5.xiaofubao.com/marketing/health/doDetail";
 const method = "POST";
-const headers = {"Cookie": "shiroJID=2c0d1c4a-a5ef-4215-b213-55f96e941e7a"};
+const headers = {"Content-Type": "application/x-www-form-urlencoded","Cookie": "shiroJID=1f4649f7-78dc-48f0-81e5-797884131ac9","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"};
 const data1 = "userId=2009211656237844100";
-
+var do_id=null
 const getRequest = {
     url: get_url,
     method: method, // Optional, default GET.
@@ -18,11 +11,10 @@ const getRequest = {
     body: data1 // Optional.
 };
 
-
 $task.fetch(getRequest).then(response => {
     // response.statusCode, response.headers, response.body
-        var getbody = JSON.parse(response.body);
-        var num = getbody.data.id;
+    var getjson=JSON.parse(response.body)
+    do_id=getjson.data.id;
     var data = {
         "address" : "云南省昆明市寻甸回族彝族自治县先锋镇138乡道",
         "uuToken" : "PpVA8ejkbx44YENMEgf6BWVT/H8b6e68Fld47CWd/OP+osCumDnYrJ/7KwNFIl2etvzy4mtPgr7oot4j9TMaag==",
@@ -32,7 +24,7 @@ $task.fetch(getRequest).then(response => {
         "temperature" : "36.8",
         "locationInfo" : "云南省昆明市寻甸回族彝族自治县先锋镇138乡道",
         "longitudeAndLatitude" : "103.0343221028646,25.49524603949653",
-        'id':'num',
+        'id': null,
         'schoolCode':'10681',
         'schoolName':'云南师范大学',
         'identityType':1,
@@ -74,6 +66,7 @@ $task.fetch(getRequest).then(response => {
         'temperature':'36',
         'country':''
         }
+    data.id = do_id+"";
     const doRequest = {
     url: do_url,
     method: method, // Optional, default GET.
@@ -82,21 +75,21 @@ $task.fetch(getRequest).then(response => {
 };
 $task.fetch(doRequest).then(response => {
     // response.statusCode, response.headers, response.body
-    const dobody = JSON.parse(response.body);
-    const success = dobody.success;
+    var dobody = JSON.parse(response.body);
+    var success = dobody.success;
     console.log(response.body);
     if(success=="true"){
-    $notify("成功", "Subtitle", response.body); // Success!
-    $done();}
+    $notify("打卡成功", "", response.body); // Success!
+    $done();
+    }
 }, reason => {
     // reason.error
-    $notify("失败", "Subtitle", reason.error); // Error!
+    $notify("打卡失败", "", reason.error); // Error!
     $done();
 });
-    
-    $done();
+$done();
 }, reason => {
     // reason.error
-    $notify("打卡失败！", "获取用户表单ID失败！", reason.error); // Error!
+    $notify("Title","获取用户表单ID失败",reason.error); // Error!
     $done();
 });
