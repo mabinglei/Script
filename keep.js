@@ -10,8 +10,8 @@ hostname = api.gotokeep.com
 
 var obj = JSON.parse($response.body);
 
-obj.data.cardList.data.logInfo.duration=1234;
-obj.data.cardList.data.logInfo.calorie=43;
-obj.data.cardList.data.caloriePercentage=99.936170212765958;
+obj.data.cardList[1].data.logInfo.duration=1234;
+obj.data.cardList[1].data.logInfo.calorie=43;
+obj.data.cardList[1].data.caloriePercentage=99.936170212765958;
 
 $done({body: JSON.stringify(obj)});
