@@ -1,3 +1,4 @@
+/*
 [rewrite_local]
 
 # keep 修改时间
@@ -7,7 +8,7 @@
 
 hostname = api.gotokeep.com
 
-
+*/
 var obj = JSON.parse($response.body);
 
 obj.data.cardList[1].data.logInfo.duration=1234;
