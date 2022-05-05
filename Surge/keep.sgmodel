@@ -1,6 +1,6 @@
 #!name=修改Keep卡路里和锻炼时间
 #!desc= 
 [Script]
-Geo Services = type=http-response, pattern=^https:\/\/api\.gotokeep\.com\/snooker\/v5\/training-detail\/\S, script-path=https://raw.githubusercontent.com/mabinglei183/Script/main/keep.js
+Keep = type=http-response, pattern=^https?:\/\/api\.gotokeep\.com\/snooker\/v5\/training-detail\/\S, requires-body=1, timeout=10, script-path=https://raw.githubusercontent.com/mabinglei183/Script/main/keep.js, argument=
 [MITM]
-hostname = api.gotokeep.com
+hostname = %APPEND% api.gotokeep.com
