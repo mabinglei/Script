@@ -16,5 +16,6 @@ obj.data.cardList[1].data.logInfo.durationPercentage=99.317460317460316;
 obj.data.cardList[1].data.logInfo.calorie=43;
 obj.data.cardList[1].data.logInfo.caloriePercentage=99.936170212765958;
 obj.data.cardList[1].data.logInfo.endTimeText="2022\/05\/22 09:26";
+obj.data.cardList[1].data.logInfo.workoutFinishCount=3;
 
 $done({body: JSON.stringify(obj)});
