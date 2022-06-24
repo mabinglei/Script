@@ -2,7 +2,6 @@
 #!desc=调整后续规则
 
 [Rule]
-# > Look Up (Only for Wikipedia@macOS, Surge Enhance Mode enabled required)
 DOMAIN,ocsp.apple.com,REJECT // /跳过企业证书到期
 DOMAIN,sub.store,DIRECT // Sub Store
 DOMAIN-KEYWORD,sub-store,DIRECT // Sub-Store
