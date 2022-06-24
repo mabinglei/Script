@@ -1,0 +1,17 @@
+#!name= iRingo for Siri & Search
+#!desc=(V2) 全面自定义「Siri与搜索」的功能。
+#!openUrl=http://boxjs.com/#/app/iRingo.Siri
+#!author=VirgilClyne
+#!homepage=https://github.com/VirgilClyne
+#!manual=https://github.com/VirgilClyne//iRingo/wiki/🔍Siri与搜索
+#!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Siri.png
+
+[Rule]
+# > Look Up (Only for Wikipedia@macOS, Surge Enhance Mode enabled required)
+DOMAIN,ocsp.apple.com,REJECT // /跳过企业证书到期
+DOMAIN,sub.store,DIRECT // Sub Store
+DOMAIN-KEYWORD,sub-store,DIRECT // Sub-Store
+DOMAIN-KEYWORD,pornhub,REJECT
+DOMAIN,api.waqi.info,DIRECT // 天气信息
+DOMAIN,sessions.bugsnag.com,PROXY // Latency Benchmark
+DOMAIN,errlog.umeng.com,REJECT-TINYGIF //学习通防暴力去广告
