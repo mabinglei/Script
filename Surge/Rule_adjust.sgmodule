@@ -7,7 +7,7 @@ DOMAIN,sub.store,DIRECT // Sub Store
 DOMAIN-KEYWORD,sub-store,DIRECT // Sub-Store
 DOMAIN-KEYWORD,pornhub,REJECT
 DOMAIN,api.waqi.info,DIRECT // 天气信息
-DOMAIN,sessions.bugsnag.com,PROXY // Latency Benchmark
+DOMAIN,sessions.bugsnag.com,DIRECT // Latency Benchmark
 DOMAIN,errlog.umeng.com,DIRECT //学习通防暴力去广告
 DOMAIN, www.youtusoft.com,REJECT
 DOMAIN-SUFFIX, youtusoft.com,REJECT
