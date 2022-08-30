@@ -3,8 +3,6 @@
 
 [Rule]
 DOMAIN,ocsp.apple.com,REJECT // /跳过企业证书到期
-DOMAIN,sub.store,DIRECT // Sub Store
-DOMAIN-KEYWORD,sub-store,DIRECT // Sub-Store
 DOMAIN-KEYWORD,pornhub,REJECT
 DOMAIN,api.waqi.info,DIRECT // 天气信息
 DOMAIN,sessions.bugsnag.com,DIRECT // Latency Benchmark
