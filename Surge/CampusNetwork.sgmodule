@@ -1,0 +1,8 @@
+#!name=校园网认证
+#!desc=跳过代理校园网认证并排除路由，使校园网认证不经过Surge
+
+
+[General]
+always-real-ip = %APPEND% *.ynnu.edu.cn
+skip-proxy = %APPEND% *.ynnu.edu.cn
+tun-excluded-routes = %APPEND% 10.10.6.6/32
