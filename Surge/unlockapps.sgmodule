@@ -1,0 +1,11 @@
+#!name=App解锁合集
+#!desc=App解锁合集
+
+[Script]
+#************************************#
+# Xmind-思维导图
+# hostname = www.xmind.*
+Xmind-思维导图 = type=http-response,pattern=^https?:\/\/www\.xmind\.(cn|app)\/.+\/devices,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/chxm1023/Rewrite/main/Xmind.js
+
+[MITM]
+hostname = %APPEND% www.xmind.*
