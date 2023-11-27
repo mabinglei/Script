@@ -1,0 +1,15 @@
+#!name=Panels
+#!desc=显示网络信息
+
+#网络信息
+[Panel]
+NetInfoPanel=title="",content="",style=info,script-name=net-info-panel_CN.js,update-interval=43200
+
+[Script]
+
+#网络信息
+net-info-panel_CN.js=script-path=newNetInfo.js,type=generic,timeout=30
+
+#无线局域网检测网络信息
+[Host]
+ip-api.com = 208.95.112.1
