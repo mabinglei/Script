@@ -4,9 +4,9 @@
 [Rule]
 DOMAIN,ocsp.apple.com,REJECT // /跳过企业证书到期
 DOMAIN-KEYWORD,pornhub,REJECT
-DOMAIN,api.waqi.info,Direct // 天气信息
-DOMAIN,sessions.bugsnag.com,Direct // Latency Benchmark
-DOMAIN,errlog.umeng.com,Direct //学习通防暴力去广告
+DOMAIN,api.waqi.info,DIRECT // 天气信息
+DOMAIN,sessions.bugsnag.com,DIRECT // Latency Benchmark
+DOMAIN,errlog.umeng.com,DIRECT //学习通防暴力去广告
 DOMAIN,feed-image.baidu.com,REJECT //百度贴吧去广告
 DOMAIN, www.youtusoft.com,REJECT
 DOMAIN-SUFFIX, youtusoft.com,REJECT
