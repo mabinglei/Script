@@ -13,7 +13,7 @@
                 "CookieDmit"
             ],
             "descs_html": [
-                "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.dmit.io/clientarea.php">DMIT</a></h4>"
+                "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.dmit.io/clientarea.php\">DMIT</a></h4>"
             ],
             "script": "newNetInfo.js",
             "author": "@LordVader",
@@ -30,7 +30,7 @@
                 "CookieSolaDrive"
             ],
             "descs_html": [
-                "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.soladrive.com/support/clientarea.php">SolaDrive</a></h4>"
+                "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.soladrive.com/support/clientarea.php\">SolaDrive</a></h4>"
             ],
             "script": "newNetInfo.js",
             "author": "@LordVader",
