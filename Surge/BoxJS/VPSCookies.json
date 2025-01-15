@@ -1,0 +1,44 @@
+{
+    "id": "LordVader.app.sub",
+    "name": "Lord Vader VPS Cookies",
+    "description": "获取自用VPS的Cookies",
+    "author": "@LordVader",
+    "icon": "https://avatars2.githubusercontent.com/u/42637658",
+    "repo": "https://github.com/mabinglei/Script/tree/main",
+    "apps": [
+        {
+            "id": "Dmit",
+            "name": "Dmit VPS",
+            "keys": [
+                "CookieDmit"
+            ],
+            "descs_html": [
+                "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js\">脚本注释</a></h4>"
+            ],
+            "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
+            "author": "@LordVader",
+            "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
+            "icons": [
+                "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/tieba.png",
+                "https://raw.githubusercontent.com/NobyDa/mini/master/Color/tieba.png"
+            ]
+        },
+        {
+            "id": "SolaDrive",
+            "name": "SolaDrive VPS",
+            "keys": [
+                "CookieSolaDrive"
+            ],
+            "descs_html": [
+                "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js\">脚本注释</a></h4>"
+            ],
+            "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
+            "author": "@LordVader",
+            "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
+            "icons": [
+                "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/tieba.png",
+                "https://raw.githubusercontent.com/NobyDa/mini/master/Color/tieba.png"
+            ]
+        }
+    ]
+}
