@@ -1,43 +1,43 @@
 {
     "id": "LordVader.app.sub",
-    "name": "Lord Vader VPS Cookies",
+    "name": "Lord Vader VPS",
     "description": "获取自用VPS的Cookies",
     "author": "@LordVader",
     "icon": "https://avatars2.githubusercontent.com/u/42637658",
     "repo": "https://github.com/mabinglei/Script/tree/main",
     "apps": [
         {
-            "id": "Dmit",
-            "name": "Dmit VPS",
+            "id": "DMIT",
+            "name": "DMIT, Inc.",
             "keys": [
                 "CookieDmit"
             ],
             "descs_html": [
-                "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js\">脚本注释</a></h4>"
+                "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.dmit.io/clientarea.php">DMIT</a></h4>"
             ],
-            "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
+            "script": "newNetInfo.js",
             "author": "@LordVader",
-            "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
+            "repo": "https://github.com/mabinglei/Script/tree/main",
             "icons": [
                 "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/tieba.png",
-                "https://raw.githubusercontent.com/NobyDa/mini/master/Color/tieba.png"
+                "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/dmit_logo.png"
             ]
         },
         {
             "id": "SolaDrive",
-            "name": "SolaDrive VPS",
+            "name": "SolaDrive",
             "keys": [
                 "CookieSolaDrive"
             ],
             "descs_html": [
-                "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js\">脚本注释</a></h4>"
+                "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.soladrive.com/support/clientarea.php">SolaDrive</a></h4>"
             ],
-            "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
+            "script": "newNetInfo.js",
             "author": "@LordVader",
-            "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
+            "repo": "https://github.com/mabinglei/Script/tree/main",
             "icons": [
                 "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/tieba.png",
-                "https://raw.githubusercontent.com/NobyDa/mini/master/Color/tieba.png"
+                "https://www.soladrive.com/wp-content/uploads/2023/04/cropped-faviconlatest-192x192.png"
             ]
         }
     ]
