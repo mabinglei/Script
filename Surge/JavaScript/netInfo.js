@@ -70,15 +70,9 @@ class loggerUtil {
     }
 }
 
-var logger = new loggerUtil();
-
-var $vader = vader();
-var CookieValOfDmit = $vader.read("CookieDmit");
-var CookieValOfSolaDrive = $vader.read("CookieSolaDrive");
-
 function getCookie() {
 
-  let headerCookie = $request.headers["Cookie"] || $request.headers["cookie"];
+  const headerCookie = $request.headers["Cookie"] || $request.headers["cookie"];
   if ($request.url.includes('dmit.io')) {
       if (headerCookie && headerCookie.includes('cf_clearance=')) {
         if (CookieValOfDmit != headerCookie) {
@@ -98,10 +92,10 @@ function getCookie() {
         $vader.notify("写入SolaDrive Cookie失败 ‼️", "原因：twk_uuid值缺失", $request.url);
       }
   } else {
-    $vader.notify("写入Cookie失败 ‼️", "原因：未知的VPS供应商", $request.url);
+    $vader.notify("写入Cookie失败 ‼️", "原因：未知的VPS提供商", $request.url);
   }
-
   return $vader.done();
+
 }
 
 function vader() {
@@ -173,7 +167,7 @@ function vader() {
     post,
     done
   }
-};
+}
 
 function randomString(e = 6) {
     var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678",
@@ -529,8 +523,6 @@ function getIP() {
 // 获取网络信息
 function getNetworkInfo() {
 
-    argument = Object.fromEntries($argument.split("&").map(e => e.split("=", 2).map(e => e.replace(/\"/g, ""))))
-
     if (!argument.IpInfoToken) {
         errorHandling(new Error("请在该模块的参数配置部分填入正确的IpInfo Token"))
     }
@@ -553,40 +545,24 @@ function getNetworkInfo() {
         }
 
         checkIpRisk(info.ip).then((ipInfo) => {
-            const ipScore = ipInfo.score
-            const ipRisk = ipInfo.risk
-            const ipType = ipInfo.userType
-            var ipRiskCHN = ''
-            switch (ipRisk) {
-                case 'very high':
-                    ipRiskCHN = '非常高';
-                    break;
-                case 'high':
-                    ipRiskCHN = '高';
-                    break;
-                case 'medium':
-                    ipRiskCHN = '中';
-                    break;
-                case 'low':
-                    ipRiskCHN = '低';
-                    break;
-                default:
-                    ipRiskCHN = 'Unknown';
-                    break;
-            }
 
+            const riskMapping = {
+                'very high': '非常高',
+                'high': '高',
+                'medium': '中',
+                'low': '低'
+            };
+
+            const ipRisk = riskMapping[ipInfo.risk] || 'Unknown';
 
             if (info.ip == argument.SolaDriveVPSIP || info.ip == argument.DmitVPSIP) {
                 getVPSInfo(info.ip).then((value) => {
-                    console.log(value.used)
-                    console.log(value.total)
-                    console.log(value.nextCycle)
                     $done({
                         title: getSSID() ?? getCellularInfo(),
                         content: getIP() +
-                            `节点IP : ${info.ip} (${ipScore}分|${ipRiskCHN}风险)\n` +
+                            `节点IP : ${info.ip} (${ipInfo.score}分|${ipRisk}风险)\n` +
                             `流　量 :${value.used} /${value.total} (${getRmainingDays(value.nextCycle)}天)\n` +
-                            `供应商 : ${info.org} (${ipType})\n` +
+                            `供应商 : ${info.org} (${ipInfo.userType})\n` +
                             `位　置 : ${info.city}, ${info.country}`,
                         icon: getSSID() ? 'wifi' : 'simcard',
                         'icon-color': getSSID() ? '#005CAF' : '#005CAF',
@@ -598,8 +574,8 @@ function getNetworkInfo() {
                 $done({
                     title: getSSID() ?? getCellularInfo(),
                     content: getIP() +
-                        `节点IP : ${info.ip} (${ipScore}分|${ipRiskCHN}风险)\n` +
-                        `供应商 : ${info.org} (${ipType})\n` +
+                        `节点IP : ${info.ip} (${ipInfo.score}分|${ipRisk}风险)\n` +
+                        `供应商 : ${info.org} (${ipInfo.userType})\n` +
                         `位　置 : ${info.city}, ${info.country}`,
                     icon: getSSID() ? 'wifi' : 'simcard',
                     'icon-color': getSSID() ? '#005CAF' : '#005CAF',
@@ -626,7 +602,7 @@ function errorHandling(error) {
   if (error.message) {
       logger.error(error);
       $done({
-          title: '发生错误',
+          title: '发生错误 ‼️',
           content: `${error.message}`,
           icon: 'wifi.exclamationmark',
           'icon-color': '#CB1B45',
@@ -634,7 +610,7 @@ function errorHandling(error) {
   }
 
   $done({
-      title: '发生错误',
+      title: '发生错误 ‼️',
       content: '未知错误',
       icon: 'wifi.exclamationmark',
       'icon-color': '#CB1B45',
@@ -651,15 +627,13 @@ function getVPSInfo(ip) {
 
                 if (!argument.SolaDriveVPSIP || !argument.SolaDriveVPSId) {
                     reject(new Error(`请检查该模块的SolaDrive参数配置是否正确`));
-                    return
                 }
 
                 if (!CookieValOfSolaDrive) {
-                    reject(new Error(`请先获取 SolaDrive Cookie`));
-                    return
+                    reject(new Error(`请先获取SolaDrive Cookie`));
                 }
 
-                let opts = {
+                const opts = {
                     url: `https://www.soladrive.com/support/modules/servers/solusvmpro/get_client_data.php?vserverid=${argument.SolaDriveVPSId}`,
                     headers: {
                         'Cookie': CookieValOfSolaDrive
@@ -667,35 +641,28 @@ function getVPSInfo(ip) {
                 }
 
                 $httpClient.get(opts, function(error, response, data) {
-                    if (error) {
-                      reject(new Error(`调用www.soladrive.com时发生错误`));
-                      return
-                    }
-                    if (Number(response.status) != 200) {
-                      reject(new Error(`调用www.soladrive.com时发生错误,错误代码 ${response.status}`));
-                      return
-                    }
 
-                    let info;
+                    if (error || Number(response.status) !== 200) {
+                        const errorMessage = error 
+                            ? `获取SolaDrive主机信息时发生错误,错误原因 ${error.message}` 
+                            : `获取SolaDrive主机信息时发生错误,错误代码 ${response.status}`;
+                        reject(new Error(errorMessage));
+                    }
 
                     try {
-                        info = JSON.parse(data);
-                        if (info.status == "error") {
-                          reject(new Error(info.displaystatus));
-                          return
+                        const info = JSON.parse(data);
+                        if (info.status === "error") {
+                            reject(new Error(info.displaystatus));
                         } else {
-                          let used = ' ' + info.bandwidthused
-                          let total = ' ' + info.bandwidthtotal
-                          // let dateString = info.success.nextduedate
-                          // let date = new Date(dateString)
-                          // let day = date.getDate()
-                          let nextCycle = Number(argument.SolaDriveVPSResetDay)
-                          resolve({ used, total, nextCycle });
+                            const used = ` ${info.bandwidthused}`;
+                            const total = ` ${info.bandwidthtotal}`;
+                            const nextCycle = Number(argument.SolaDriveVPSResetDay);
+                            resolve({ used, total, nextCycle });
                         }
                     } catch (error) {
-                        reject(new Error(error));
-                        return
+                        reject(error);
                     }
+
                 })
             });
 
@@ -705,15 +672,13 @@ function getVPSInfo(ip) {
 
                 if (!argument.DmitVPSIP || !argument.DmitVPSId) {
                     reject(new Error(`请检查该模块的DMIT参数配置是否正确`));
-                    return
                 }
 
                 if (!CookieValOfDmit) {
-                    reject(new Error(`请先获取 DMIT Cookie`));
-                    return
+                    reject(new Error(`请先获取DMIT Cookie`));
                 }
 
-                let opts = {
+                const opts = {
                     url: `https://www.dmit.io/clientarea.php?action=productdetails&id=${argument.DmitVPSId}&json=1&pure=1&page=standard&subaction=whmcsdetail`,
                     headers: {
                         'Cookie': CookieValOfDmit
@@ -721,40 +686,33 @@ function getVPSInfo(ip) {
                 }
 
                 $httpClient.get(opts, function(error, response, data) {
-                    if (error) {
-                      reject(new Error(`调用www.dmit.io时发生错误`));
-                      return
-                    }
-                    if (Number(response.status) != 200) {
-                      reject(new Error(`调用www.dmit.io时发生错误,错误代码 ${response.status}`));
-                      return
-                    }
 
-                    let info;
+                    if (error || Number(response.status) !== 200) {
+                        const errorMessage = error 
+                            ? `获取DMIT主机信息时发生错误,错误原因 ${error.message}` 
+                            : `获取DMIT主机信息时发生错误,错误代码 ${response.status}`;
+                        reject(new Error(errorMessage));
+                    }
 
                     try {
-                        info = JSON.parse(data);
-                        if (info.result == "success") {
-                          let used = ' ' + (info.success.bwusage / 1024).toFixed(2) + ' GB'
-                          let total = ' ' + info.success.bwlimit / 1024 + ' GB'
-                          let dateString = info.success.nextduedate
-                          let date = new Date(dateString)
-                          let day = date.getDate()
-                          let nextCycle = day
-                          resolve({ used, total, nextCycle });
+                        const info = JSON.parse(data);
+                        if (info.result === "success") {
+                            const used = ` ${(info.success.bwusage / 1024).toFixed(2)} GB`;
+                            const total = ` ${(info.success.bwlimit / 1024).toFixed(2)} GB`;
+                            const date = new Date(info.success.nextduedate);
+                            const nextCycle = date.getDate();
+                            resolve({ used, total, nextCycle });
                         } else {
-                          reject(new Error(`www.dmit.io返回的JSON无效`));
-                          return
+                            reject(new Error(`www.dmit.io返回的JSON无效`));
                         }
                     } catch (error) {
-                        reject(new Error(error));
-                        return
+                        reject(error);
                     }
+
                 })
             });
 
         default:
-
             errorHandling(new Error(`未知的VPS提供商`));
 
     }
@@ -767,73 +725,70 @@ function checkIpRisk(ip) {
 
         if (!argument.scamalyticsApiKey || !argument.scamalyticsUsername) {
             reject(new Error(`请检查该模块的scamalytics参数配置是否正确`));
-            return;
         }
 
-        let opts1 = {
-                url: `https://api11.scamalytics.com/${argument.scamalyticsUsername}/?key=${argument.scamalyticsApiKey}&ip=${ip}&test=0`,
-                headers: {
-                    'Accept': 'application/json',
-                },
+        const opts = {
+            url: `https://api11.scamalytics.com/${argument.scamalyticsUsername}/?key=${argument.scamalyticsApiKey}&ip=${ip}&test=0`,
+            headers: {
+                'Accept': 'application/json',
+            },
         };
 
-        $httpClient.get(opts1, function(error, response, data) {
-            if (error) {
-                reject(new Error('调用scamalytics.com时发生错误'));
-                return;
-            }
-            if (Number(response.status) != 200) {
-                reject(new Error(`调用scamalytics.com时发生错误,错误代码 ${response.status}`));
-                return;
+        $httpClient.get(opts, function(error, response, data) {
+
+            if (error || Number(response.status) !== 200) {
+                const errorMessage = error 
+                    ? `调用scamalytics接口时发生错误,错误原因 ${error.message}` 
+                    : `调用scamalytics接口时发生错误,错误代码 ${response.status}`;
+                reject(new Error(errorMessage));
             }
 
-            const info = JSON.parse(data);
-            const ipInfo = { score: info.score, risk: info.risk };
-            resolve(ipInfo);
+            try {
+                const info = JSON.parse(data);
+                const ipInfo = { score: info.score, risk: info.risk };
+                resolve(ipInfo);
+            } catch (parseError) {
+                reject(new Error(`解析scamalytics返回的JSON时发生错误: ${parseError.message}`));
+            }
+
         });
 
     });
 
     const ipType = new Promise((resolve, reject) => {
-        let opts2 = {
+
+        const opts = {
             url: `https://pixelscan.net/s/api/ci`,
             headers: {
                 'Accept': 'application/json',
             },
         };
 
-        $httpClient.post(opts2, function(error, response, data) {
-            if (error) {
-                reject(new Error('调用pixelscan.net时发生错误'));
-                return;
-            }
-            if (Number(response.status) != 200) {
-                reject(new Error(`调用pixelscan.net时发生错误,错误代码 ${response.status}`));
-                return;
+        $httpClient.post(opts, function(error, response, data) {
+
+            if (error || Number(response.status) !== 200) {
+                const errorMessage = error 
+                    ? `调用pixelscan.net接口时发生错误,错误原因 ${error.message}` 
+                    : `调用pixelscan.net接口时发生错误,错误代码 ${response.status}`;
+                reject(new Error(errorMessage));
             }
 
-            const info = JSON.parse(data);
-            var type = ''
-            switch (info.value.userType) {
-                case 'N/A':
-                case 'Internet Hosting Services':
-                    type = '机房'
-                    break;
-                case 'residential':
-                    type = '住宅'
-                    break;
-                case 'Telecommunications':
-                    type = '电信'
-                    break;
-                case 'Internet Service Provider':
-                    type = 'ISP'
-                    break;
-                default:
-                    type = info.value.userType
-                    break;
+            try {
+                const info = JSON.parse(data);
+                const userTypeMap = {
+                    'N/A': '机房',
+                    'Internet Hosting Services': '机房',
+                    'residential': '住宅',
+                    'Telecommunications': '电信',
+                    'Internet Service Provider': 'ISP'
+                };
+                const type = userTypeMap[info.value.userType] || info.value.userType;
+                const userType = { userType: type };
+                resolve(userType);
+            } catch (parseError) {
+                reject(new Error(`解析pixelscan.net返回的JSON时发生错误: ${parseError.message}`));
             }
-            const userType = { userType: type };
-            resolve(userType);
+
         });
     });
 
@@ -852,10 +807,10 @@ function checkIpRisk(ip) {
 function getRmainingDays(resetDay) {
     if (!resetDay) return 'Unknown';
 
-    let now = new Date();
-    let today = now.getDate();
-    let month = now.getMonth();
-    let year = now.getFullYear();
+    const now = new Date();
+    const today = now.getDate();
+    const month = now.getMonth();
+    const year = now.getFullYear();
     let daysInMonth;
 
     if (resetDay > today) {
@@ -868,11 +823,16 @@ function getRmainingDays(resetDay) {
 }
 
 /**
- * 主要逻辑，程序入口
+ * 程序入口
  */
+const logger = new loggerUtil();
+const $vader = vader();
+const CookieValOfDmit = $vader.read("CookieDmit");
+const CookieValOfSolaDrive = $vader.read("CookieSolaDrive");
+const argument = Object.fromEntries($argument.split("&").map(e => e.split("=", 2).map(e => e.replace(/\"/g, ""))));
 
 if ($vader.isRequest) {
-  getCookie()
+    getCookie()
 } else {
     (() => {
         getNetworkInfo();
