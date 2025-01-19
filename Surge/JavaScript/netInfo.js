@@ -108,7 +108,7 @@ function getCookie() {
             "auto-dismiss": 5
         })
   }
-  return $vader.done();
+  return $vader.done(console.log(`发生错误${headerCookie}`));
 
 }
 
