@@ -618,43 +618,43 @@ function errorHandling(error) {
 
   if (error.message) {
     if (errorUrl) {
-        if (error.Url.includes('ipinfo.io')) {
-            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的API密钥`, error.message, {
+        if (errorUrl.includes('ipinfo.io')) {
+            $vader.notify("发生错误 ‼️", `点击以重新获取IPInfo API密钥`, error.message, {
                 "media-url": "https://cdn.ipinfo.io/static/deviceicons/android-icon-192x192.png",
                 "action": "open-url",
                 "url": errorUrl,
                 "auto-dismiss": 5
             })
-        } else if (error.Url.includes('scamalytics.com')) {
-            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的API密钥`, error.message, {
+        } else if (errorUrl.includes('scamalytics.com')) {
+            $vader.notify("发生错误 ‼️", `点击以重新获取scamalytics API密钥`, error.message, {
                 "media-url": "https://scamalytics.com/wp-content/uploads/2016/06/icon_128.png",
                 "action": "open-url",
                 "url": errorUrl,
                 "auto-dismiss": 5
             })
-        } else if (error.Url.includes('pixelscan.net')) {
-            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的API密钥`, error.message, {
+        } else if (errorUrl.includes('pixelscan.net')) {
+            $vader.notify("发生错误 ‼️", `点击以重新获取pixelscan API密钥`, error.message, {
                 "media-url": "https://pixelscan.net/assets/apple-touch-icon.png?v=2",
                 "action": "open-url",
                 "url": errorUrl,
                 "auto-dismiss": 5
             })
-        } else if (error.Url.includes('dmit.io')) {
-            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的Cookie`, error.message, {
+        } else if (errorUrl.includes('dmit.io')) {
+            $vader.notify("发生错误 ‼️", `点击以重新获取Dmit Cookie`, error.message, {
                 "media-url": "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/dmit_logo.png",
                 "action": "open-url",
                 "url": errorUrl,
                 "auto-dismiss": 5
             })
-        } else if (error.Url.includes('soladrive.com')) {
-            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的Cookie`, error.message, {
+        } else if (errorUrl.includes('soladrive.com')) {
+            $vader.notify("发生错误 ‼️", `点击以重新获取SolaDrive Cookie`, error.message, {
                 "media-url": "https://www.soladrive.com/wp-content/uploads/2023/04/cropped-faviconlatest-192x192.png",
                 "action": "open-url",
                 "url": errorUrl,
                 "auto-dismiss": 5
             })
         } else {
-            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的API密钥`, error.message, {
+            $vader.notify("发生错误 ‼️", `点击以重新获取${errorUrl} API密钥`, error.message, {
                 "action": "open-url",
                 "url": errorUrl,
                 "auto-dismiss": 5
