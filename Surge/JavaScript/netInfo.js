@@ -903,7 +903,7 @@ const $vader = vader();
 const CookieValOfDmit = $vader.read("CookieDmit");
 const CookieValOfSolaDrive = $vader.read("CookieSolaDrive");
 const argument = Object.fromEntries($argument.split("&").map(e => e.split("=", 2).map(e => e.replace(/\"/g, ""))));
-let errorUrl
+let errorUrl = null;
 
 if ($vader.isRequest) {
     getCookie()
