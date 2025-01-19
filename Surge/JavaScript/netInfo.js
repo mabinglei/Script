@@ -77,22 +77,22 @@ function getCookie() {
       if (headerCookie && headerCookie.includes('cf_clearance=')) {
         if (CookieValOfDmit != headerCookie) {
           $vader.write(headerCookie, "CookieDmit")
-          $vader.notify("写入Dmit Cookie成功 🎉", "", $request.url);
+          $vader.notify("写入Dmit Cookie成功 🎉", "", $request.url, { "auto-dismiss": 5 });
         }
       } else {
-        $vader.notify("写入Dmit Cookie失败 ‼️", "原因：cf_clearance值缺失", $request.url);
+        $vader.notify("写入Dmit Cookie失败 ‼️", "原因：cf_clearance值缺失", $request.url, { "auto-dismiss": 5 });
       }
   } else if ($request.url.includes('soladrive.com')) {
       if (headerCookie && headerCookie.includes('twk_uuid')) {
         if (CookieValOfSolaDrive != headerCookie) {
           $vader.write(headerCookie, "CookieSolaDrive")
-          $vader.notify("写入SolaDrive Cookie成功 🎉", "", $request.url);
+          $vader.notify("写入SolaDrive Cookie成功 🎉", "", $request.url, { "auto-dismiss": 5 });
         }
       } else {
-        $vader.notify("写入SolaDrive Cookie失败 ‼️", "原因：twk_uuid值缺失", $request.url);
+        $vader.notify("写入SolaDrive Cookie失败 ‼️", "原因：twk_uuid值缺失", $request.url, { "auto-dismiss": 5 });
       }
   } else {
-    $vader.notify("写入Cookie失败 ‼️", "原因：未知的VPS提供商", $request.url);
+    $vader.notify("写入Cookie失败 ‼️", "原因：未知的VPS提供商", $request.url, { "auto-dismiss": 5 });
   }
   return $vader.done();
 
@@ -102,9 +102,9 @@ function vader() {
   const isRequest = typeof $request != "undefined"
   const isSurge = typeof $httpClient != "undefined"
   const isQuanX = typeof $task != "undefined"
-  const notify = (title, subtitle, message) => {
+  const notify = (title, subtitle, message, options) => {
     if (isQuanX) $notify(title, subtitle, message)
-    if (isSurge) $notification.post(title, subtitle, message)
+    if (isSurge) $notification.post(title, subtitle, message, options)
   }
   const write = (value, key) => {
     if (isQuanX) return $prefs.setValueForKey(value, key)
@@ -524,13 +524,15 @@ function getIP() {
 function getNetworkInfo() {
 
     if (!argument.IpInfoToken) {
+        errorUrl = 'https://ipinfo.io/account/home'
         errorHandling(new Error("请在该模块的参数配置部分填入正确的IpInfo Token"))
     }
 
     // 发送网络请求
     httpMethod.get(`https://ipinfo.io/json?token=${argument.IpInfoToken}`).then(response => {
         if (Number(response.status) != 200) {
-          throw new Error(`调用ipinfo.io发生错误，错误代码 ${response.status}`);
+            errorUrl = 'https://ipinfo.io/account/home'
+            throw new Error(`调用ipinfo.io发生错误，错误代码 ${response.status}`);
         }
         const info = JSON.parse(response.data);
         const orgValue = info.org;
@@ -585,6 +587,7 @@ function getNetworkInfo() {
             errorHandling(error)
         });
     }).catch(error => {
+        errorUrl = 'https://ipinfo.io/account/home'
         errorHandling(error)
     });
 }
@@ -597,6 +600,30 @@ function errorHandling(error) {
           $network.v4 = undefined;
           $network.v6 = undefined;
       }
+  }
+
+  if (errorUrl) {
+    if (error.Url.includes('dmit.io') || error.Url.includes('soladrive.com')) {
+        $vader.notify(
+            "发生错误 ‼️",
+            "",
+            `点击此通知尝试重新获取${errorUrl}的Cookie`,
+            {
+                "open-url": errorUrl,
+                "auto-dismiss": 10
+            }
+        )
+    } else {
+        $vader.notify(
+            "发生错误 ‼️",
+            "",
+            `点击此通知尝试重新获取${errorUrl}的API密钥`,
+            {
+                "open-url": errorUrl,
+                "auto-dismiss": 10
+            }
+        )
+    }
   }
 
   if (error.message) {
@@ -630,6 +657,7 @@ function getVPSInfo(ip) {
                 }
 
                 if (!CookieValOfSolaDrive) {
+                    errorUrl = 'https://www.soladrive.com/support/clientarea.php'
                     reject(new Error(`请先获取SolaDrive Cookie`));
                 }
 
@@ -646,12 +674,14 @@ function getVPSInfo(ip) {
                         const errorMessage = error 
                             ? `获取SolaDrive主机信息时发生错误,错误原因 ${error.message}` 
                             : `获取SolaDrive主机信息时发生错误,错误代码 ${response.status}`;
+                        errorUrl = 'https://www.soladrive.com/support/clientarea.php'
                         reject(new Error(errorMessage));
                     }
 
                     try {
                         const info = JSON.parse(data);
                         if (info.status === "error") {
+                            errorUrl = 'https://www.soladrive.com/support/clientarea.php'
                             reject(new Error(info.displaystatus));
                         } else {
                             const used = ` ${info.bandwidthused}`;
@@ -660,7 +690,8 @@ function getVPSInfo(ip) {
                             resolve({ used, total, nextCycle });
                         }
                     } catch (error) {
-                        reject(error);
+                        errorUrl = 'https://www.soladrive.com/support/clientarea.php'
+                        reject(new Error(`解析www.soladrive.com返回的JSON时发生错误: ${error.message}`));
                     }
 
                 })
@@ -675,6 +706,7 @@ function getVPSInfo(ip) {
                 }
 
                 if (!CookieValOfDmit) {
+                    errorUrl = 'https://www.dmit.io/clientarea.php'
                     reject(new Error(`请先获取DMIT Cookie`));
                 }
 
@@ -691,6 +723,7 @@ function getVPSInfo(ip) {
                         const errorMessage = error 
                             ? `获取DMIT主机信息时发生错误,错误原因 ${error.message}` 
                             : `获取DMIT主机信息时发生错误,错误代码 ${response.status}`;
+                        errorUrl = 'https://www.dmit.io/clientarea.php'
                         reject(new Error(errorMessage));
                     }
 
@@ -703,10 +736,12 @@ function getVPSInfo(ip) {
                             const nextCycle = date.getDate();
                             resolve({ used, total, nextCycle });
                         } else {
+                            errorUrl = 'https://www.dmit.io/clientarea.php'
                             reject(new Error(`www.dmit.io返回的JSON无效`));
                         }
                     } catch (error) {
-                        reject(error);
+                        errorUrl = 'https://www.dmit.io/clientarea.php'
+                        reject(new Error(`解析www.dmit.io返回的JSON时发生错误: ${error.message}`));
                     }
 
                 })
@@ -740,6 +775,7 @@ function checkIpRisk(ip) {
                 const errorMessage = error 
                     ? `调用scamalytics接口时发生错误,错误原因 ${error.message}` 
                     : `调用scamalytics接口时发生错误,错误代码 ${response.status}`;
+                errorUrl = 'https://scamalytics.com'
                 reject(new Error(errorMessage));
             }
 
@@ -748,6 +784,7 @@ function checkIpRisk(ip) {
                 const ipInfo = { score: info.score, risk: info.risk };
                 resolve(ipInfo);
             } catch (parseError) {
+                errorUrl = 'https://scamalytics.com'
                 reject(new Error(`解析scamalytics返回的JSON时发生错误: ${parseError.message}`));
             }
 
@@ -770,6 +807,7 @@ function checkIpRisk(ip) {
                 const errorMessage = error 
                     ? `调用pixelscan.net接口时发生错误,错误原因 ${error.message}` 
                     : `调用pixelscan.net接口时发生错误,错误代码 ${response.status}`;
+                errorUrl = opts.url
                 reject(new Error(errorMessage));
             }
 
@@ -786,6 +824,7 @@ function checkIpRisk(ip) {
                 const userType = { userType: type };
                 resolve(userType);
             } catch (parseError) {
+                errorUrl = opts.url
                 reject(new Error(`解析pixelscan.net返回的JSON时发生错误: ${parseError.message}`));
             }
 
@@ -830,6 +869,7 @@ const $vader = vader();
 const CookieValOfDmit = $vader.read("CookieDmit");
 const CookieValOfSolaDrive = $vader.read("CookieSolaDrive");
 const argument = Object.fromEntries($argument.split("&").map(e => e.split("=", 2).map(e => e.replace(/\"/g, ""))));
+let errorUrl
 
 if ($vader.isRequest) {
     getCookie()
