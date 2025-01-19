@@ -902,13 +902,13 @@ const logger = new loggerUtil();
 const $vader = vader();
 const CookieValOfDmit = $vader.read("CookieDmit");
 const CookieValOfSolaDrive = $vader.read("CookieSolaDrive");
-const argText = $argument || ""; 
-const argument = Object.fromEntries(argText.split("&").map(e => e.split("=", 2).map(e => e.replace(/\"/g, ""))));
+let argument = null;
 let errorUrl = null;
 
 if ($vader.isRequest) {
     getCookie()
 } else {
+    argument = Object.fromEntries($argument.split("&").map(e => e.split("=", 2).map(e => e.replace(/\"/g, ""))));
     (() => {
         getNetworkInfo();
     })();
