@@ -76,23 +76,37 @@ function getCookie() {
   if ($request.url.includes('dmit.io')) {
       if (headerCookie && headerCookie.includes('cf_clearance=')) {
         if (CookieValOfDmit != headerCookie) {
-          $vader.write(headerCookie, "CookieDmit")
-          $vader.notify("写入Dmit Cookie成功 🎉", "", $request.url, { "auto-dismiss": 5 });
+            $vader.write(headerCookie, "CookieDmit")
+            $vader.notify("写入Dmit Cookie成功 🎉", "", $request.url, {
+                "media-url": "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/dmit_logo.png",
+                "auto-dismiss": 5
+            })
         }
       } else {
-        $vader.notify("写入Dmit Cookie失败 ‼️", "原因：cf_clearance值缺失", $request.url, { "auto-dismiss": 5 });
+            $vader.notify("写入Dmit Cookie失败 ‼️", "原因：cf_clearance值缺失", $request.url, {
+                "media-url": "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/dmit_logo.png",
+                "auto-dismiss": 5
+            })
       }
   } else if ($request.url.includes('soladrive.com')) {
       if (headerCookie && headerCookie.includes('twk_uuid')) {
         if (CookieValOfSolaDrive != headerCookie) {
-          $vader.write(headerCookie, "CookieSolaDrive")
-          $vader.notify("写入SolaDrive Cookie成功 🎉", "", $request.url, { "auto-dismiss": 5 });
+            $vader.write(headerCookie, "CookieSolaDrive")
+            $vader.notify("写入SolaDrive Cookie成功 🎉", "", $request.url, {
+                "media-url": "https://www.soladrive.com/wp-content/uploads/2023/04/cropped-faviconlatest-192x192.png",
+                "auto-dismiss": 5
+            })
         }
       } else {
-        $vader.notify("写入SolaDrive Cookie失败 ‼️", "原因：twk_uuid值缺失", $request.url, { "auto-dismiss": 5 });
+            $vader.notify("写入SolaDrive Cookie失败 ‼️", "原因：twk_uuid值缺失", $request.url, {
+                "media-url": "https://www.soladrive.com/wp-content/uploads/2023/04/cropped-faviconlatest-192x192.png",
+                "auto-dismiss": 5
+            })
       }
   } else {
-    $vader.notify("写入Cookie失败 ‼️", "原因：未知的VPS提供商", $request.url, { "auto-dismiss": 5 });
+        $vader.notify("写入Cookie失败 ‼️", "原因：未知的VPS提供商", $request.url, {
+            "auto-dismiss": 5
+        })
   }
   return $vader.done();
 
@@ -602,31 +616,51 @@ function errorHandling(error) {
       }
   }
 
-  if (errorUrl) {
-    if (error.Url.includes('dmit.io') || error.Url.includes('soladrive.com')) {
-        $vader.notify(
-            "发生错误 ‼️",
-            "",
-            `点击此通知尝试重新获取${errorUrl}的Cookie`,
-            {
-                "open-url": errorUrl,
-                "auto-dismiss": 10
-            }
-        )
-    } else {
-        $vader.notify(
-            "发生错误 ‼️",
-            "",
-            `点击此通知尝试重新获取${errorUrl}的API密钥`,
-            {
-                "open-url": errorUrl,
-                "auto-dismiss": 10
-            }
-        )
-    }
-  }
-
   if (error.message) {
+    if (errorUrl) {
+        if (error.Url.includes('ipinfo.io')) {
+            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的API密钥`, error.message, {
+                "media-url": "https://cdn.ipinfo.io/static/deviceicons/android-icon-192x192.png",
+                "action": "open-url",
+                "url": errorUrl,
+                "auto-dismiss": 5
+            })
+        } else if (error.Url.includes('scamalytics.com')) {
+            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的API密钥`, error.message, {
+                "media-url": "https://scamalytics.com/wp-content/uploads/2016/06/icon_128.png",
+                "action": "open-url",
+                "url": errorUrl,
+                "auto-dismiss": 5
+            })
+        } else if (error.Url.includes('pixelscan.net')) {
+            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的API密钥`, error.message, {
+                "media-url": "https://pixelscan.net/assets/apple-touch-icon.png?v=2",
+                "action": "open-url",
+                "url": errorUrl,
+                "auto-dismiss": 5
+            })
+        } else if (error.Url.includes('dmit.io')) {
+            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的Cookie`, error.message, {
+                "media-url": "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/dmit_logo.png",
+                "action": "open-url",
+                "url": errorUrl,
+                "auto-dismiss": 5
+            })
+        } else if (error.Url.includes('soladrive.com')) {
+            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的Cookie`, error.message, {
+                "media-url": "https://www.soladrive.com/wp-content/uploads/2023/04/cropped-faviconlatest-192x192.png",
+                "action": "open-url",
+                "url": errorUrl,
+                "auto-dismiss": 5
+            })
+        } else {
+            $vader.notify("发生错误 ‼️", `点击此通知尝试重新获取${errorUrl}的API密钥`, error.message, {
+                "action": "open-url",
+                "url": errorUrl,
+                "auto-dismiss": 5
+            })
+        }
+    }
       logger.error(error);
       $done({
           title: '发生错误 ‼️',
@@ -807,7 +841,7 @@ function checkIpRisk(ip) {
                 const errorMessage = error 
                     ? `调用pixelscan.net接口时发生错误,错误原因 ${error.message}` 
                     : `调用pixelscan.net接口时发生错误,错误代码 ${response.status}`;
-                errorUrl = opts.url
+                errorUrl = 'https://pixelscan.net'
                 reject(new Error(errorMessage));
             }
 
@@ -824,7 +858,7 @@ function checkIpRisk(ip) {
                 const userType = { userType: type };
                 resolve(userType);
             } catch (parseError) {
-                errorUrl = opts.url
+                errorUrl = 'https://pixelscan.net'
                 reject(new Error(`解析pixelscan.net返回的JSON时发生错误: ${parseError.message}`));
             }
 
