@@ -1,8 +1,8 @@
 #!name=Panels
 #!desc=显示网络和VPS信息的面板
 #!author=Lord Vader
-#!arguments=禁用脚本:hostname, IpInfoToken:"", scamalyticsUsername:"", scamalyticsApiKey:"", DmitVPSIP:"", DmitVPSId:"", SolaDriveVPSIP:"", SolaDriveVPSId:"", SolaDriveVPSResetDay:""
-#!arguments-desc=参数说明：\n\n禁用脚本：禁用获取Cookie的脚本，输入 # 表示禁用 \n\nIpInfoToken：ipinfo.io的API Token \n\nscamalyticsUsername：scamalytics.com 用户名 \n\nscamalyticsApiKey：scamalytics.com API密钥\n\nDmitVPSIP：需要监控的DMIT主机的IP地址 \n\nDmitVPSId：需要监控的DMIT主机的ID \n\nSolaDriveVPSIP：需要监控的SolaDrive主机的IP地址 \n\nSolaDriveVPSId：需要监控的SolaDrive主机的ID \n\nSolaDriveVPSResetDay：需要监控的SolaDrive主机的重置日期(Day)
+#!arguments=禁用脚本:hostname
+#!arguments-desc=参数说明：\n\n禁用脚本：禁用获取Cookie的脚本，输入 # 表示禁用
 #!category=Lord Vader
 
 #网络信息
@@ -12,7 +12,7 @@ NetInfoPanel=title="",content="",style=info,script-name=netInfoPanel,update-inte
 [Script]
 
 #网络信息
-netInfoPanel = script-path=https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/Surge/JavaScript/netInfo.js,type=generic,timeout=30,debug=1, argument=IpInfoToken="{{{IpInfoToken}}}"&scamalyticsUsername="{{{scamalyticsUsername}}}"&scamalyticsApiKey="{{{scamalyticsApiKey}}}"&DmitVPSIP="{{{DmitVPSIP}}}"&DmitVPSId="{{{DmitVPSId}}}"&SolaDriveVPSIP="{{{SolaDriveVPSIP}}}"&SolaDriveVPSId="{{{SolaDriveVPSId}}}"&SolaDriveVPSResetDay="{{{SolaDriveVPSResetDay}}}"
+netInfoPanel = script-path=https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/Surge/JavaScript/netInfo.js,type=generic,timeout=30,debug=1
 
 #获取Cookie
 {{{禁用脚本}}}GetDmitCookie = type=http-request,pattern=^https?:\/\/www\.dmit\.io\/clientarea\.php\/?$,requires-body=1,max-size=-1,debug=1,script-path=https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/Surge/JavaScript/netInfo.js
