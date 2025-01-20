@@ -607,83 +607,86 @@ function getNetworkInfo() {
 }
 
 function errorHandling(error) {
-  // 网络切换
-  if (String(error).startsWith("Network changed")) {
-      if (getSSID()) {
-          $network.wifi = undefined;
-          $network.v4 = undefined;
-          $network.v6 = undefined;
-      }
-  }
-
-  if (error.message) {
-    if (cookieUrl) {
-        if (cookieUrl.includes('ipinfo.io')) {
-            $vader.notify("发生错误 ‼️", `点击以重新获取IPInfo Token`, error.message, {
-                "media-url": "https://cdn.ipinfo.io/static/deviceicons/android-icon-192x192.png",
-                "action": "open-url",
-                "url": cookieUrl,
-                "auto-dismiss": 10
-            })
-        } else if (cookieUrl.includes('scamalytics.com')) {
-            $vader.notify("发生错误 ‼️", `点击以重新获取Scamalytics API密钥`, error.message, {
-                "media-url": "https://scamalytics.com/wp-content/uploads/2016/06/icon_128.png",
-                "action": "open-url",
-                "url": cookieUrl,
-                "auto-dismiss": 10
-            })
-        } else if (cookieUrl.includes('pixelscan.net')) {
-            $vader.notify("发生错误 ‼️", `点击以重新获取pixelscan API密钥`, error.message, {
-                "media-url": "https://pixelscan.net/assets/apple-touch-icon.png?v=2",
-                "action": "open-url",
-                "url": cookieUrl,
-                "auto-dismiss": 10
-            })
-        } else if (cookieUrl.includes('dmit.io')) {
-            $vader.notify("发生错误 ‼️", `点击以重新获取Dmit Cookie`, error.message, {
-                "media-url": "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/dmit_logo.png",
-                "action": "open-url",
-                "url": cookieUrl,
-                "auto-dismiss": 10
-            })
-        } else if (cookieUrl.includes('soladrive.com')) {
-            $vader.notify("发生错误 ‼️", `点击以重新获取SolaDrive Cookie`, error.message, {
-                "media-url": "https://www.soladrive.com/wp-content/uploads/2023/04/cropped-faviconlatest-192x192.png",
-                "action": "open-url",
-                "url": cookieUrl,
-                "auto-dismiss": 10
-            })
-        } else {
-            $vader.notify("发生错误 ‼️", `点击以重新获取${cookieUrl} API密钥`, error.message, {
-                "action": "open-url",
-                "url": cookieUrl,
-                "auto-dismiss": 10
-            })
+    // 网络切换
+    if (String(error).startsWith("Network changed")) {
+        if (getSSID()) {
+            $network.wifi = undefined;
+            $network.v4 = undefined;
+            $network.v6 = undefined;
         }
     }
-      logger.error(error);
-      $done({
-          title: '发生错误 ‼️',
-          content: `${error.message}`,
-          icon: 'wifi.exclamationmark',
-          'icon-color': '#CB1B45',
-      });
-  }
 
-  $done({
-      title: '发生错误 ‼️',
-      content: '未知错误',
-      icon: 'wifi.exclamationmark',
-      'icon-color': '#CB1B45',
-  });
+    if (retryCount === 0) {
+        if (error.message) {
+            if (cookieUrl) {
+                if (cookieUrl.includes('ipinfo.io')) {
+                    $vader.notify("发生错误 ‼️", `点击以重新获取IPInfo Token`, error.message, {
+                        "media-url": "https://cdn.ipinfo.io/static/deviceicons/android-icon-192x192.png",
+                        "action": "open-url",
+                        "url": cookieUrl,
+                        "auto-dismiss": 10
+                    })
+                } else if (cookieUrl.includes('scamalytics.com')) {
+                    $vader.notify("发生错误 ‼️", `点击以重新获取Scamalytics API密钥`, error.message, {
+                        "media-url": "https://scamalytics.com/wp-content/uploads/2016/06/icon_128.png",
+                        "action": "open-url",
+                        "url": cookieUrl,
+                        "auto-dismiss": 10
+                    })
+                } else if (cookieUrl.includes('pixelscan.net')) {
+                    $vader.notify("发生错误 ‼️", `点击以重新获取pixelscan API密钥`, error.message, {
+                        "media-url": "https://pixelscan.net/assets/apple-touch-icon.png?v=2",
+                        "action": "open-url",
+                        "url": cookieUrl,
+                        "auto-dismiss": 10
+                    })
+                } else if (cookieUrl.includes('dmit.io')) {
+                    $vader.notify("发生错误 ‼️", `点击以重新获取Dmit Cookie`, error.message, {
+                        "media-url": "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/dmit_logo.png",
+                        "action": "open-url",
+                        "url": cookieUrl,
+                        "auto-dismiss": 10
+                    })
+                } else if (cookieUrl.includes('soladrive.com')) {
+                    $vader.notify("发生错误 ‼️", `点击以重新获取SolaDrive Cookie`, error.message, {
+                        "media-url": "https://www.soladrive.com/wp-content/uploads/2023/04/cropped-faviconlatest-192x192.png",
+                        "action": "open-url",
+                        "url": cookieUrl,
+                        "auto-dismiss": 10
+                    })
+                } else {
+                    $vader.notify("发生错误 ‼️", `点击以重新获取${cookieUrl} API密钥`, error.message, {
+                        "action": "open-url",
+                        "url": cookieUrl,
+                        "auto-dismiss": 10
+                    })
+                }
+            }
+            logger.error(error);
+            $done({
+                title: '发生错误 ‼️',
+                content: `${error.message}`,
+                icon: 'wifi.exclamationmark',
+                'icon-color': '#CB1B45',
+            });
+        }
+        $done({
+            title: '发生错误 ‼️',
+            content: '未知错误',
+            icon: 'wifi.exclamationmark',
+            'icon-color': '#CB1B45',
+        });
+    }
+    retryCount--
+    console.log(`第${3-retryCount}次尝试`)
+    getNetworkInfo();
 }
 
 function getVPSInfo(ip) {
 
     if (VPSIPsOfDmit.indexOf(ip) > -1) {
 
-
-        return getVPSInfo = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
             const id = VPSIDsOfDmit[VPSIPsOfDmit.indexOf(ip)]
 
@@ -737,7 +740,7 @@ function getVPSInfo(ip) {
 
     if (VPSIPsOfSolaDrive.indexOf(ip) > -1) {
 
-        return getVPSInfo = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
             const id = VPSIDsOfSolaDrive[VPSIPsOfSolaDrive.indexOf(ip)]
 
@@ -788,7 +791,6 @@ function getVPSInfo(ip) {
 
             })
         });
-
     }
 
 }
@@ -916,6 +918,7 @@ const VPSIDsOfSolaDrive = $vader.read("VPSIDsSolaDrive").split(",");
 const VPSIPsOfSolaDrive = $vader.read("VPSIPsSolaDrive").split(",");
 const VPSResetDayOfSolaDrive = $vader.read("VPSResetDaySolaDrive").split(",");
 const CookieValOfSolaDrive = $vader.read("CookieSolaDrive");
+let retryCount = 3;
 let cookieUrl = null;
 
 if ($vader.isRequest) {
