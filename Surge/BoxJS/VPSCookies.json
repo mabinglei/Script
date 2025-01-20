@@ -10,10 +10,30 @@
             "id": "DMIT",
             "name": "DMIT, Inc.",
             "keys": [
+                "VPSIDsDmit",
+                "VPSIPsDmit",
                 "CookieDmit"
             ],
             "descs_html": [
                 "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.dmit.io/clientarea.php\">DMIT</a></h4>"
+            ],
+            "settings": [
+                {
+                    "id": "VPSIDsDmit",
+                    "name": "VPS ID(s)",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "如有多台VPS，请用“,”隔开",
+                    "desc": "VPS的ID(s)，如有多台VPS，请用“,”隔开"
+                },
+                {
+                    "id": "VPSIPsDmit",
+                    "name": "VPS IP(s)",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "如有多台VPS，请用“,”隔开",
+                    "desc": "VPS的IP(s)，如有多台VPS，请用“,”隔开，注意与VPS ID(s)顺序保持一致"
+                }
             ],
             "script": "newNetInfo.js",
             "author": "@LordVader",
@@ -27,10 +47,39 @@
             "id": "SolaDrive",
             "name": "SolaDrive",
             "keys": [
+                "VPSIDsSolaDrive",
+                "VPSIPsSolaDrive",
+                "VPSResetDaySolaDrive"
                 "CookieSolaDrive"
             ],
             "descs_html": [
                 "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.soladrive.com/support/clientarea.php\">SolaDrive</a></h4>"
+            ],
+            "settings": [
+                {
+                    "id": "VPSIDsSolaDrive",
+                    "name": "VPS ID(s)",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "如有多台VPS，请用“,”隔开",
+                    "desc": "VPS的ID(s)，如有多台VPS，请用“,”隔开"
+                },
+                {
+                    "id": "VPSIPsSolaDrive",
+                    "name": "VPS IP(s)",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "如有多台VPS，请用“,”隔开",
+                    "desc": "VPS的IP(s)，如有多台VPS，请用“,”隔开，注意与VPS ID(s)顺序保持一致"
+                },
+                {
+                    "id": "VPSResetDaySolaDrive",
+                    "name": "VPS 重置时间(Day)",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "如有多台VPS，请用“,”隔开",
+                    "desc": "VPS的重置时间（只需给出Day即可，不需要Month），如有多台VPS，请用“,”隔开，注意与VPS ID(s)顺序保持一致"
+                }
             ],
             "script": "newNetInfo.js",
             "author": "@LordVader",
