@@ -13,7 +13,7 @@
                 "TokenIPinfo"
             ],
             "descs_html": [
-                "<h4 align=\"center\">获取ACCESS TOKEN请访问<a href=\"https://ipinfo.io/account/home\">DMIT</a></h4>"
+                "<h4 align=\"center\">获取ACCESS TOKEN请访问<a href=\"https://ipinfo.io/account/home\">IPinfo</a></h4>"
             ],
             "settings": [
                 {
@@ -41,7 +41,7 @@
                 "APIKeyScamalytics"
             ],
             "descs_html": [
-                "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.dmit.io/clientarea.php\">DMIT</a></h4>"
+                "<h4 align=\"center\">获取API密钥请访问<a href=\"https://scamalytics.com\">Scamalytics</a></h4>"
             ],
             "settings": [
                 {
@@ -54,11 +54,11 @@
                 },
                 {
                     "id": "APIKeyScamalytics",
-                    "name": "API 密钥",
+                    "name": "API密钥",
                     "val": "",
                     "type": "text",
                     "placeholder": "",
-                    "desc": "Scamalytics的API 密钥"
+                    "desc": "Scamalytics的API密钥"
                 }
             ],
             "script": "newNetInfo.js",
