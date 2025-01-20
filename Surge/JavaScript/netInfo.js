@@ -571,7 +571,7 @@ function getNetworkInfo() {
 
             const ipRisk = riskMapping[ipInfo.risk] || 'Unknown';
 
-            if (VPSIPsOfDmit.indexOf(info.ip) || VPSIPsOfSolaDrive.indexOf(info.ip)) {
+            if (VPSIPsOfDmit.indexOf(info.ip) > -1 || VPSIPsOfSolaDrive.indexOf(info.ip) > -1) {
                 getVPSInfo(info.ip).then((value) => {
                     $done({
                         title: getSSID() ?? getCellularInfo(),
