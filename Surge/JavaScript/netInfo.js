@@ -680,11 +680,11 @@ function errorHandling(error) {
 
 function getVPSInfo(ip) {
 
-    if (VPSIPsOfDmit.indexOf(info.ip)) {
+    if (!VPSIPsOfDmit.indexOf(ip)) {
 
         return getVPSInfo = new Promise((resolve, reject) => {
 
-            const id = VPSIDsOfDmit[VPSIPsOfDmit.indexOf(info.ip)]
+            const id = VPSIDsOfDmit[VPSIPsOfDmit.indexOf(ip)]
 
             if (!id) {
                 reject(new Error(`请检查BoxJS订阅中的DMIT参数配置是否正确`));
@@ -734,13 +734,13 @@ function getVPSInfo(ip) {
         });
     }
 
-    if (VPSIPsOfSolaDrive.indexOf(info.ip)) {
+    if (!VPSIPsOfSolaDrive.indexOf(ip)) {
 
         return getVPSInfo = new Promise((resolve, reject) => {
 
-            const id = VPSIDsOfSolaDrive[VPSIPsOfSolaDrive.indexOf(info.ip)]
+            const id = VPSIDsOfSolaDrive[VPSIPsOfSolaDrive.indexOf(ip)]
 
-            const day = VPSResetDayOfSolaDrive[VPSIPsOfSolaDrive.indexOf(info.ip)]
+            const day = VPSResetDayOfSolaDrive[VPSIPsOfSolaDrive.indexOf(ip)]
 
             if (!id) {
                 reject(new Error(`请检查BoxJS订阅中的SolaDrive参数配置是否正确`));
