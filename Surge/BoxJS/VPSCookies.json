@@ -1,11 +1,74 @@
 {
     "id": "LordVader.app.sub",
     "name": "Lord Vader",
-    "description": "获取自用VPS的Cookies",
+    "description": "获取自用VPS的IP信息和流量使用情况",
     "author": "@LordVader",
     "icon": "https://avatars2.githubusercontent.com/u/42637658",
     "repo": "https://github.com/mabinglei/Script/tree/main",
     "apps": [
+        {
+            "id": "IPinfo",
+            "name": "IPinfo",
+            "keys": [
+                "TokenIPinfo"
+            ],
+            "descs_html": [
+                "<h4 align=\"center\">获取ACCESS TOKEN请访问<a href=\"https://ipinfo.io/account/home\">DMIT</a></h4>"
+            ],
+            "settings": [
+                {
+                    "id": "TokenIPinfo",
+                    "name": "ACCESS TOKEN",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "",
+                    "desc": "IPinfo的ACCESS TOKEN"
+                }
+            ],
+            "script": "newNetInfo.js",
+            "author": "@LordVader",
+            "repo": "https://github.com/mabinglei/Script/tree/main",
+            "icons": [
+                "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/backgroundColor.png",
+                "https://cdn.ipinfo.io/static/deviceicons/android-icon-192x192.png"
+            ]
+        },
+        {
+            "id": "Scamalytics",
+            "name": "Scamalytics",
+            "keys": [
+                "UsernameScamalytics",
+                "APIKeyScamalytics"
+            ],
+            "descs_html": [
+                "<h4 align=\"center\">获取Cookie请访问<a href=\"https://www.dmit.io/clientarea.php\">DMIT</a></h4>"
+            ],
+            "settings": [
+                {
+                    "id": "UsernameScamalytics",
+                    "name": "用户名",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "",
+                    "desc": "Scamalytics的用户名"
+                },
+                {
+                    "id": "APIKeyScamalytics",
+                    "name": "API 密钥",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "",
+                    "desc": "Scamalytics的API 密钥"
+                }
+            ],
+            "script": "newNetInfo.js",
+            "author": "@LordVader",
+            "repo": "https://github.com/mabinglei/Script/tree/main",
+            "icons": [
+                "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/backgroundColor.png",
+                "https://scamalytics.com/wp-content/uploads/2016/06/icon_128.png"
+            ]
+        },
         {
             "id": "DMIT",
             "name": "DMIT, Inc.",
