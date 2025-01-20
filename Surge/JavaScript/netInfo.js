@@ -680,7 +680,8 @@ function errorHandling(error) {
 
 function getVPSInfo(ip) {
 
-    if (!VPSIPsOfDmit.indexOf(ip)) {
+    if (VPSIPsOfDmit.indexOf(ip) > -1) {
+
 
         return getVPSInfo = new Promise((resolve, reject) => {
 
@@ -734,7 +735,7 @@ function getVPSInfo(ip) {
         });
     }
 
-    if (!VPSIPsOfSolaDrive.indexOf(ip)) {
+    if (VPSIPsOfSolaDrive.indexOf(ip) > -1) {
 
         return getVPSInfo = new Promise((resolve, reject) => {
 
