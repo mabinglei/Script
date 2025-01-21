@@ -2,7 +2,7 @@
 #!desc=显示网络和VPS信息的面板
 #!author=Lord Vader
 #!arguments=禁用脚本:hostname
-#!arguments-desc=参数说明：\n\n禁用脚本：禁用获取Cookie的脚本，输入 # 表示禁用
+#!arguments-desc=禁用脚本：禁用获取Cookie的脚本，输入 # 表示禁用
 #!category=Lord Vader
 
 #网络信息
