@@ -620,42 +620,42 @@ function errorHandling(error) {
         if (error.message) {
             if (cookieUrl) {
                 if (cookieUrl.includes('ipinfo.io')) {
-                    $vader.notify("发生错误 ‼️", `点击以重新获取IPInfo Token`, error.message, {
+                    $vader.notify("发生错误 ‼️", `点击重新获取IPInfo Token`, error.message, {
                         "media-url": "https://cdn.ipinfo.io/static/deviceicons/android-icon-192x192.png",
                         "action": "open-url",
                         "url": cookieUrl,
                         "auto-dismiss": 10
                     })
                 } else if (cookieUrl.includes('scamalytics.com')) {
-                    $vader.notify("发生错误 ‼️", `点击以重新获取Scamalytics API密钥`, error.message, {
+                    $vader.notify("发生错误 ‼️", `点击重新获取Scamalytics API密钥`, error.message, {
                         "media-url": "https://scamalytics.com/wp-content/uploads/2016/06/icon_128.png",
                         "action": "open-url",
                         "url": cookieUrl,
                         "auto-dismiss": 10
                     })
                 } else if (cookieUrl.includes('pixelscan.net')) {
-                    $vader.notify("发生错误 ‼️", `点击以重新获取pixelscan API密钥`, error.message, {
+                    $vader.notify("发生错误 ‼️", `点击重新获取Pixelscan API密钥`, error.message, {
                         "media-url": "https://pixelscan.net/assets/apple-touch-icon.png?v=2",
                         "action": "open-url",
                         "url": cookieUrl,
                         "auto-dismiss": 10
                     })
                 } else if (cookieUrl.includes('dmit.io')) {
-                    $vader.notify("发生错误 ‼️", `点击以重新获取Dmit Cookie`, error.message, {
+                    $vader.notify("发生错误 ‼️", `点击重新获取Dmit Cookie`, error.message, {
                         "media-url": "https://raw.githubusercontent.com/mabinglei/Script/refs/heads/main/dmit_logo.png",
                         "action": "open-url",
                         "url": cookieUrl,
                         "auto-dismiss": 10
                     })
                 } else if (cookieUrl.includes('soladrive.com')) {
-                    $vader.notify("发生错误 ‼️", `点击以重新获取SolaDrive Cookie`, error.message, {
+                    $vader.notify("发生错误 ‼️", `点击重新获取SolaDrive Cookie`, error.message, {
                         "media-url": "https://www.soladrive.com/wp-content/uploads/2023/04/cropped-faviconlatest-192x192.png",
                         "action": "open-url",
                         "url": cookieUrl,
                         "auto-dismiss": 10
                     })
                 } else {
-                    $vader.notify("发生错误 ‼️", `点击以重新获取${cookieUrl} API密钥`, error.message, {
+                    $vader.notify("发生错误 ‼️", `点击重新获取${cookieUrl} API密钥`, error.message, {
                         "action": "open-url",
                         "url": cookieUrl,
                         "auto-dismiss": 10
