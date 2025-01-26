@@ -702,8 +702,7 @@ function getVPSInfo(ip) {
             const opts = {
                 url: `https://www.dmit.io/clientarea.php?action=productdetails&id=${id}&json=1&pure=1&page=standard&subaction=whmcsdetail`,
                 headers: {
-                    'Cookie': CookieValOfDmit,
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.2 Safari/605.1.15'
+                    'Cookie': CookieValOfDmit
                 },
             }
 
@@ -758,8 +757,7 @@ function getVPSInfo(ip) {
             const opts = {
                 url: `https://www.soladrive.com/support/modules/servers/solusvmpro/get_client_data.php?vserverid=${id}`,
                 headers: {
-                    'Cookie': CookieValOfSolaDrive,
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.2 Safari/605.1.15'
+                    'Cookie': CookieValOfSolaDrive
                 },
             }
 
