@@ -702,6 +702,7 @@ function getVPSInfo(ip) {
             const opts = {
                 url: `https://www.dmit.io/clientarea.php?action=productdetails&id=${id}&json=1&pure=1&page=standard&subaction=whmcsdetail`,
                 headers: {
+                    'User-Agent': 'PostmanRuntime/7.48.0',
                     'Cookie': CookieValOfDmit
                 },
             }
