@@ -1,0 +1,14 @@
+#!name=Apple Intelligence
+#!desc=Apple Intelligence 代理规则
+#!author=Lord Vader
+#!arguments=rule:PROXY
+#!arguments-desc=rule: Apple Intelligence的出站策略组
+#!category=Lord Vader
+
+[Rule]
+DOMAIN, guzzoni.apple.com, {{{rule}}} // Siri and dictation requests
+DOMAIN, apple-relay.cloudflare.com, {{{rule}}} // Private Cloud Compute
+DOMAIN, apple-relay.fastly-edge.com, {{{rule}}} // Private Cloud Compute
+DOMAIN, cp4.cloudflare.com, {{{rule}}} // Private Cloud Compute
+DOMAIN, apple-relay.apple.com, {{{rule}}} // Apple Intelligence Extensions
+DOMAIN-SUFFIX, smoot.apple.com, {{{rule}}} // Search services
