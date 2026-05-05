@@ -10,22 +10,22 @@
             "id": "ChinaTelecom",
             "name": "中国电信",
             "keys": [
-                "china_telecom_loginUrl",
-                "china_telecom_cookie"
+                "@LordVader.china_telecom_loginUrl",
+                "@LordVader.china_telecom_cookie"
             ],
             "descs_html": [
                 "<h4 align=\"center\">获取登录地址及Cookie请访问<a href=\"https://e.dlife.cn/index.do\">天翼账号</a></h4>"
             ],
             "settings": [
                 {
-                    "id": "china_telecom_loginUrl",
+                    "id": "@LordVader.china_telecom_loginUrl",
                     "name": "天翼账号登录地址",
                     "val": null,
                     "type": "text",
                     "desc": ""
                 },
                 {
-                    "id": "china_telecom_cookie",
+                    "id": "@LordVader.china_telecom_cookie",
                     "name": "天翼账号Cookie",
                     "val": null,
                     "type": "text",
