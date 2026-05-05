@@ -1,0 +1,15 @@
+#!name=中国电信
+#!desc=获取天翼账号登录URL和Cookie
+#!author=Lord Vader
+#!arguments=禁用登录URL脚本=url&禁用获取Cookie的脚本=cookie
+#!arguments-desc=禁用脚本：输入 # 表示禁用
+#!category=Lord Vader
+
+[Script]
+
+#获取登录URL及Cookie
+{{{禁用登录URL脚本}}}GetCTUrl = type=http-request,pattern=^https:\/\/e\.dlife\.cn\/user\/loginMiddle,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/mabinglei/Script/main/Surge/JavaScript/getCTCookie.js
+{{{禁用获取Cookie的脚本}}}GetCTCookie = type=http-response,pattern=^https:\/\/e\.dlife\.cn\/user\/loginMiddle,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/mabinglei/Script/main/Surge/JavaScript/getCTCookie.js
+
+[MITM]
+hostname = %APPEND% e.dlife.cn
