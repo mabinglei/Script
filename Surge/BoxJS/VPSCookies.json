@@ -7,6 +7,38 @@
     "repo": "https://github.com/mabinglei/Script/tree/main",
     "apps": [
         {
+            "id": "10000Ck",
+            "name": "中国电信",
+            "keys": [
+                "@yy_10000.china_telecom_loginUrl",
+                "@yy_10000.china_telecom_cookie"
+            ],
+            "descs_html": [
+                "<h4 align=\"center\">获取登录地址及Cookie请访问<a href=\"https://e.dlife.cn/index.do\">天翼账号</a></h4>"
+            ],
+            "settings": [
+                {
+                    "id": "@yy_10000.china_telecom_loginUrl",
+                    "name": "天翼账号登录地址",
+                    "val": null,
+                    "type": "text",
+                    "desc": ""
+                },
+                {
+                    "id": "@yy_10000.china_telecom_cookie",
+                    "name": "天翼账号Cookie",
+                    "val": null,
+                    "type": "text",
+                    "desc": ""
+                }
+            ],
+            "author": "@LordVader",
+            "icons": [
+                "https://raw.githubusercontent.com/Orz-3/mini/master/Alpha/10000.png",
+                "https://raw.githubusercontent.com/Orz-3/mini/master/Color/10000.png"
+            ]
+        },
+        {
             "id": "IPinfo",
             "name": "IPinfo",
             "keys": [
