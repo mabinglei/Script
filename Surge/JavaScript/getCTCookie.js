@@ -24,8 +24,5 @@ function getCookie() {
 
 }
 
-if ($request) {
-    getUrl()
-} else {
-    getCookie()
-}
+getUrl()
+getCookie()
